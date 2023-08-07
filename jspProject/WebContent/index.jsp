@@ -43,7 +43,7 @@
   -->
   
   
-  <h2>11111</h2>
+  <%@ include file = "views/common/menubar.jsp" %>
   <% JDBCTemplate.getConnection();%>
  
 </body>
