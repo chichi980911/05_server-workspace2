@@ -23,7 +23,7 @@ public class JDBCTemplate {
 		String filepath = JDBCTemplate.class.getResource("/db/driver/driver.properties").getPath();
 //		c:/05_server-workspace2/jspProject/WebContent/classes/db/driver/driver/driver.properties
 		
-		System.out.println("filepath : " + filepath);
+//		System.out.println("filepath : " + filepath);
 		
 		try {
 			prop.load(new FileInputStream(filepath));

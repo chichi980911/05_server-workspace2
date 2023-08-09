@@ -1,5 +1,21 @@
+<%@page import="com.kh.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	String contextPath = request.getContextPath();
+%>
+    
+<%
+	Member loginMember = (Member)session.getAttribute("loginMember");
+    //로그인 시도 전 menubar.jsp 로딩시 : null
+    //로그인 성공 후 menubar.jsp 호딩시 : 로그인 성공한 회원읭 정보가 담겨있는 Member객체
+    
+    String alertMsg = (String)session.getAttribute("alertMsg");
+    //서비스 요청전 menubar.jsp 로딩시 : null
+    //서비스 성공 후 menubar.jsp 로딩시 : alert로 띄워줄 메시지 문구 
+    
+    
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,13 +53,26 @@
 </style>
 </head>
 <body>
+	<% if(alertMsg != null ) { %>
+		<script >
+		alert("<%=alertMsg%>");
+		</script>
+		<% session.removeAttribute("alertMsg");%>
+	
+	<%} %>
+
+
     <h1 align="center"> 어서오세요</h1>
 
     <div class="login-area">
 
+<% if(loginMember == null){ %>
+
+
+
     <!-- case1. 로그인 전  -->
 
-    <form action="/jspProject/login.me" method="post">
+    <form action="<%=contextPath %>/login.me" method="post">
         <table>
             <tr>
                 <th>아이디 : </th>
@@ -56,24 +85,38 @@
             <tr>
                 <th colspan="2">
                     <button type="submit">로그인</button>
-                    <button type="button">회원가입</button>
+                    <button type="button" onclick="enrollPage();">회원가입</button>
 
                 </th>
             </tr>
         </table>
-
-    </form>
+  <script>
+  
+        function enrollPage(){
+        	//location.href = "<%=contextPath%>/views/member/memberEnrollForm.jsp";
+       	 //웹 애플리케이션의 디렉토리 구조가 url에 노출되면 보안에 취약 < 얜 되고 아래는 안되는거
+       	 
+       	 
+       	 //단순한 페이지 요청도 servlet 호출해서 servlet 거쳐갈 것! (즉 url 에는 서블릿 매핑값만 노출)
+       		location.href = "<%=contextPath%>/enrollForm.me"
+       		
+       	}
+        
+        </script>
+        
+	</form>
+    <%}else{%>
 
     <!-- case2. 로그인 후  -->
-    
-    <!-- <div>
-        <b>xxx님</b>의 방문을 환영합니다. <br><br>
+    <div>
+        <b><%=loginMember.getUserName()%>님</b>의 방문을 환영합니다. <br><br>
         <div align = "center">
-            <a href="">마이페이지</a>
-            <a href="">로그아웃</a>
+            <a href="<%=contextPath %>/mypage.me">마이페이지</a>
+            <a href="<%=contextPath %>/logout.me">로그아웃</a>
         </div>
-    </div> -->
+    </div> 
     
+    <% }%>
 </div>
 
 <br clear="both"> <br>
