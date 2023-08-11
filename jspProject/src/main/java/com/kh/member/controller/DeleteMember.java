@@ -44,15 +44,18 @@ public class DeleteMember extends HttpServlet {
 			session.removeAttribute("loginMember");
 			response.sendRedirect("/jspProject");
 			
-			
-		
-			
-			
-			
 		}else {
 			session.setAttribute("alertMsg", "회원탈퇴 실패");
 			response.sendRedirect(request.getContextPath() + "/mypage.me");
-			
+//			
+//		if(result > 0 ) {
+//			session.setAttribute("alertMsg", "회원탈퇴 성공, 그동안 이용해주셔서 감사합니다");
+//			session.invalidate();
+//			response.sendRedirect(request.getContextPath());
+//		}else {
+//			session.setAttribute("alertMsg", "회원탈퇴 실패");
+//			response.sendRedirect(request.getContextPath() + "/mypage.me");
+//			
 			
 			
 			
