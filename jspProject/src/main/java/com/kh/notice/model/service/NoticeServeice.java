@@ -75,5 +75,21 @@ public class NoticeServeice {
 		
 		
 	}
+	
+	
+	public int deleteNotice(int num) {
+		Connection conn = getConnection();
+		int result = new NoticeDao().deleteNotice(conn,num);
+		
+		if(result > 0) {
+			commit(conn);
+			
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
 
 }

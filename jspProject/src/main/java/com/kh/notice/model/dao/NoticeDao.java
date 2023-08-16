@@ -180,6 +180,30 @@ public class NoticeDao {
 		
 	}
 	
+	public int deleteNotice(Connection conn , int num ) {
+		//update문 
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, num);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		
+		}
+		return result;
+		
+	}
+	
 	
 	
 }

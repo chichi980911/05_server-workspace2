@@ -68,5 +68,12 @@ UPDATE NOTICE
         WHERE NOTICE_NO = ?
 </entry>
 
+<entry key = "deleteNotice">
+
+update notice
+    set status = 'N'
+where notice_no = ?
+</entry>
+
 
 </properties>
