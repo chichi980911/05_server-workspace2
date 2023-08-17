@@ -147,7 +147,7 @@ public class BoardListController extends HttpServlet {
 		
 		//com.kh.common.model.vo.pageInfo
 		//*페이징바를 만들 때 필요한 객체
-		PageInfo pi =new PageInfo(listCount, currentPage , pageLimit , boardLimit , maxPage , startPage, endPage);
+		PageInfo pi = new PageInfo(listCount, currentPage , pageLimit , boardLimit , maxPage , startPage, endPage);
 		
 		//*현재 요청한 페이지(currentPage)에 보여질 게시글 리스트 boardLimit 수만큼 조회해가기
 		
