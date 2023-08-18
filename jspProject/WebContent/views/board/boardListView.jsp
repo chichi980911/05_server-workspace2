@@ -47,15 +47,16 @@
         <h2 align = "center"> 일반게시판</h2>
         <br>
         <!-- 로그인한 회원만 보여지는 div -->
-        <%if(loginMember != null){ %>
-        <div align = "right" style="width: 860px;">
+        <% if(loginMember != null){ %>
+            <div align = "right" 
+            >
        
-            <a href="<%= contextPath %>/enrollform.bo" class = "btn btn-sm btn-secondary">글작성</a>
-            <%} %>
+            <a href="<%= contextPath %>/enrollform.bo" class = "btn btn-sm btn-secondary" style="width: 80px;">글작성</a>
+            </div>
+        <%} %>
             <br>
             <br>
-        </div>
-
+   
         <table align = "center" class="list-area">
             <thead>
                 <tr>
@@ -121,6 +122,7 @@
             </div>
 
     </div>
+
 
 </body>
 </html>

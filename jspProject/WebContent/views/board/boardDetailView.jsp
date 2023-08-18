@@ -76,7 +76,7 @@
 
             <!-- 로그인한 사용자가 게시글 작성자일경우 -->
             <%if(loginMember != null && loginMember.getUserId().equals(b.getBoardWriter())){%>
-            <a href="#" class="btn btn-sm btn-warning">수정하기</a>
+            <a href="<%=contextPath %>/updateForm.bo?bno=<%= b.getBoardNo() %>" class="btn btn-sm btn-warning">수정하기</a>
             <a href="#" class="btn btn-sm btn-danger">삭제하기</a>
 			<% } %>
         </div>
