@@ -1,17 +1,12 @@
-<%@page import="com.kh.board.model.vo.Category"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    
-<% ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    .outer{
+   .outer{
         background-color: black;
         color: white;
         width: 1000px;
@@ -21,24 +16,26 @@
 
     }
 
-    #enroll-form table{
+    #update-form table{
         border: 1px solid white;
     }
 
-    #enroll-form input, #enroll-form textarea{
+    #update-form input, #update-form textarea{
         width: 100%;
         box-sizing: border-box;
     }
 </style>
 </head>
 <body>
-<%@ include file="../common/menubar.jsp" %>
+	<%@ include file = "../common/menubar.jsp" %>
+	
+	
 
 <div class="outer">
     <br>
-    <h2 align = "center">일반게시판 작성하기</h2>
+    <h2 align = "center">일반게시판 수정하기</h2>
     <br>
-    <form id="enroll-form" action="<%=contextPath %>/insert.bo" method="post" enctype="multipart/form-data">
+    <form id="update-form" action="<%=contextPath %>/insert.bo" method="post" enctype="multipart/form-data">
 
         <!-- 카테고리, 제목, 내용, 첨부파일 한개 , 로그인한 회원번호-->
         <input type = "hidden" name = "userNo" value="<%= loginMember.getUserNo()%>">
@@ -80,6 +77,5 @@
 
     </form>
 </div>
-
 </body>
 </html>
