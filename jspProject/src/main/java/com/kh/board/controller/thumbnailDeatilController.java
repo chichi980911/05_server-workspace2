@@ -10,20 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.model.service.BoardService;
+import com.kh.board.model.vo.Attachment;
 import com.kh.board.model.vo.Board;
 
 /**
- * Servlet implementation class ThumbnailListController
+ * Servlet implementation class thumbnailDeatilController
  */
-@WebServlet("/list.th")
-public class ThumbnailListController extends HttpServlet {
+@WebServlet("/datail.th")
+public class thumbnailDeatilController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ThumbnailListController() {
+    public thumbnailDeatilController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -31,16 +33,20 @@ public class ThumbnailListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// thumbnailListView.jsp 상에 필요한 데이터 조회해서 가야됨
-		// 나중에 추가
-		ArrayList<Board> list = new BoardService().selectThumbnailList();
-		//리스트를 담아서 가야한다.
+		int boardNo = Integer.parseInt(request.getParameter("bno"));
 		
-		request.setAttribute("list", list);
+		BoardService bService = new BoardService();
+		int result = bService.increaseCount(boardNo);
 		
+		if(result > 0 ) {//성공 = > 유효한 게시글
+			Board b = bService.selectBoard(boardNo);
+			ArrayList<Attachment> list = bService.selectAttachmentList(boardNo);
 		
-		request.getRequestDispatcher("views/board/thumbnailListView.jsp").forward(request, response);
+			request.setAttribute("b", b);
+			request.setAttribute("list", list);
 		
+			request.getRequestDispatcher("view/board/thumbnailDetailView.jsp").forward(request, response);
+		}
 		
 	}
 
@@ -48,6 +54,7 @@ public class ThumbnailListController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
