@@ -56,28 +56,25 @@
         	<%for(Board b : list) {%>
             <!-- 썸네일 한 개 -->
             <div class="thumbnail" align="center">
-            <input type = "hidden" value="<% b.getBoardNo()%>">
-                <img src=" <%=contextPath %>/<%=list.get(0).getTitleImg() %>" width="200" height="150">
+            <input type = "hidden" value="<%= b.getBoardNo() %>">
+                <img src=" <%=contextPath %>/<%=b.getTitleImg() %>" width="200" height="150">
+                
                 <p>
                     No.<%=b.getBoardNo() %> <%=b.getBoardTitle() %> <br>
                     조회수 : <%=b.getCount() %>
                 </p>
             </div>
-	<%}%>
+		<%}%>
         </div>
 
     </div>
     
-    <script>
-    $(function(){
-        $(".thumbnail").click(function(){
-    		location.href="<%=contextPath%>/deatail.th?bno=" +$(this).children("input");
-    		
-    	})
-    })
-    	
-    
-    
+   <script>
+       $(function(){
+          $(".thumbnail").click(function(){
+             location.href="<%= contextPath%>/detail.th?bno=" + $(this).children("input").val();
+          })
+       })
     </script>
 
 </body>
