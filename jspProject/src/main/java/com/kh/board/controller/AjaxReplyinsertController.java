@@ -1,29 +1,28 @@
 package com.kh.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Attachment;
-import com.kh.board.model.vo.Board;
+import com.kh.board.model.vo.Reply;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class thumbnailDeatilController
+ * Servlet implementation class AjaxReplyinsertController
  */
-@WebServlet("/detail.th")
-public class thumbnailDeatilController extends HttpServlet {
+@WebServlet("/rinsert.bo")
+public class AjaxReplyinsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public thumbnailDeatilController() {
+    public AjaxReplyinsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,21 +31,18 @@ public class thumbnailDeatilController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String replyContent = request.getParameter("content");
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
+		int userNo = ((Member)request.getSession().getAttribute("loginMember")).getUserNo();
 		
-		BoardService bService = new BoardService();
-		int result = bService.increaseCount(boardNo);
+		Reply r = new Reply();
+		r.setReplyContent(replyContent);
+		r.setRefBoardNo(boardNo);
+		r.setReplyWriter(String.valueOf(userNo));
 		
-		if(result > 0 ) {//성공 = > 유효한 게시글
-			Board b = bService.selectBoard(boardNo);
-			ArrayList<Attachment> list = bService.selectAttachmentList(boardNo);
+		int result = new BoardService().insertReply(r);
 		
-			request.setAttribute("b", b);
-			request.setAttribute("list", list);
-		
-			request.getRequestDispatcher("views/board/thumbnailDetailView.jsp").forward(request, response);
-		}
+		response.getWriter().print(result);
 		
 	}
 

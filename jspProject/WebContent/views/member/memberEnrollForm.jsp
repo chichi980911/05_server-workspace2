@@ -104,7 +104,7 @@
 	function idCheck(){
 		//중복확인 버튼 클릭시 사용자가 입력한 아이디값을 넘겨서 조회요청(존재하는지 안하는지 )
 		//1.사용 불가능일 경우 => alert로 메세지 출력 ,다시 입력할 수 있도록 유도
-		//2.사용 가능일 경우 => 진짜 사용할껀지 의사를 묻는다
+		//2.사용 가능일 경우 => 진짜 사용할껀지 의사를 묻는다 confirm 메서드
 					// =>사용하겠다는 경우 = >더이상 아이디 수정 못하게끔, 회원가입 버튼 활성화
 					// =>사용안하겠다는 경우 = >다시 입력할 수 있도록 유도
 					
@@ -115,11 +115,20 @@
 			url:"idCheck.me",
 			data:{checkId:$idInput.val()},
 			success:function(result){
-				console.log(result)
+				//console.log(result)
 				if(result == "NNNNN"){
-					alert("이미 사용중인 아이디입니다.")
+					alert("이미 존재하거나 탈퇴한 아이디입니다.")
+					$idInput.focus(); 
+					
 				}else{
-					alert("사용가능한 아이디입니다.")
+					if(confirm("사용가능한 아이디입니다. 사용하시겠습니까?")){
+						//true
+						$("#enroll-form :submit").removeAttr("disabled");
+						$idInput.attr("readonly", true);
+					}else{
+						//false
+						$idInput.focus(); 
+					}
 				}
 			},
 			error:function(){

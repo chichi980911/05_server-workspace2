@@ -2,15 +2,19 @@ package com.kh.member.model.dao;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.websocket.Session;
 
 import static com.kh.common.JDBCTemplate.*;
+
+import com.kh.board.model.vo.Reply;
 import com.kh.member.model.vo.Member;
 
 public class MemberDao {

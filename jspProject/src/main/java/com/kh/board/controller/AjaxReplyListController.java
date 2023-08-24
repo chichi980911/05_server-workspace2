@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Attachment;
-import com.kh.board.model.vo.Board;
+import com.kh.board.model.vo.Reply;
 
 /**
- * Servlet implementation class thumbnailDeatilController
+ * Servlet implementation class AjaxReplyListController
  */
-@WebServlet("/detail.th")
-public class thumbnailDeatilController extends HttpServlet {
+@WebServlet("/rlist.bo")
+public class AjaxReplyListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public thumbnailDeatilController() {
+    public AjaxReplyListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,21 +32,17 @@ public class thumbnailDeatilController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
 		
-		BoardService bService = new BoardService();
-		int result = bService.increaseCount(boardNo);
+		ArrayList<Reply> list = new BoardService().selectReplyList(boardNo);
+		//[{},{},{},...] =>json형태
+
+		//응답
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(list,response.getWriter());
 		
-		if(result > 0 ) {//성공 = > 유효한 게시글
-			Board b = bService.selectBoard(boardNo);
-			ArrayList<Attachment> list = bService.selectAttachmentList(boardNo);
 		
-			request.setAttribute("b", b);
-			request.setAttribute("list", list);
 		
-			request.getRequestDispatcher("views/board/thumbnailDetailView.jsp").forward(request, response);
-		}
 		
 	}
 

@@ -57,7 +57,7 @@
             <tr>
                 <td>대표사진</td>
                 <td colspan="3">
-                    <img src="/<%=contextPath %>/<%=list.get(0).getFilePath()%>/<%=list.get(0).getChangeName()%>" width="500" height="300">
+                    <img src="<%=contextPath %>/<%=list.get(0).getFilePath()%>/<%=list.get(0).getChangeName()%>" width="500" height="300">
                 </td>
                 
             </tr>
@@ -66,7 +66,7 @@
                 <td colspan="3">
                     <div>
                     	<%for(int i = 1; i < list.size(); i++ ){%>
-                        <img src="/<%=contextPath %>/<%= list.get(i).getFilePath() %>/<%=list.get(i).getChangeName() %>"  width="200" height="150">
+                        <img src="<%=contextPath %>/<%= list.get(i).getFilePath() %>/<%=list.get(i).getChangeName() %>"  width="200" height="150">
                         <%} %>
                     </div>
                 </td>

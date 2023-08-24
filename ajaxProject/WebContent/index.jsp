@@ -83,6 +83,16 @@
       - processData : 서버로 보내는 값에 대한 형태 설정 여부 (기본 데이터를 원하는 경우 false 설정)
       - timeout : 서버 요청 시 응답 대기 시간 (milisecond)
    </pre>
+   <p>
+	Json(Javascript object notation : 자바스크립트 객체 표기법) <br>
+	-ajax 통신시 데이터 전송에 자주 사용되는 포맷형식 중 하나 <br>
+	>[value,value,value] =>자바스크립트에서의 배열 객체 =>JSONArray <br>
+	>{key:value,key:value} =>자바스크립트에서의 일반 객체 =>JSONobject <br>
+	
+	-라이브러리 필요 (https://code.google.com/archive/p/json-simple/downloads)
+	
+	
+	</p>
 	
 	<h1>jQuery방식을 이용한 AJAX 테스트</h1>
 	
@@ -126,6 +136,175 @@
 		
 	})
 	</script>
+	
+	
+	<br>
+	
+	<h3>2.버튼 클릿기 post 방식으로 서버에 여러개의 데이터 전송 및 응답 </h3>
+	이름 : <input type="text" id="input2_1"> <br>
+	나이 : <input type="number" id="input2_2"><br>
+	<button onclick="test2();">전송</button><br>
+
+<!--  
+	응답 : <label id="output2"></label>
+	
+	<script>
+		function test2(){
+			
+			$.ajax({
+				 url:"jqAjax2.do"
+				,data:{
+					name:$("#input2_1").val(),
+					age:$("#input2_2").val()
+					}
+				,type:"post"
+				,success : function(a){
+					$("#output2").text(a);
+					$("#input2_1").val("");
+					$("#input2_2").val("");
+
+				}
+				,error : function(){
+					console.log("ajax통신실패")
+				}
+				
+			})
+		}
+
+	</script>
+	-->
+	
+	
+	<!--v2-->
+	응답
+	<ul id="output2">
+		
+	</ul>
+	
+	<script>
+	function test2(){
+		$.ajax({
+			 url:"jqAjax2.do"
+			,data:{
+				 name:$("#input2_1").val()
+				,age:$("#input2_2").val()
+			}
+			,type:"post"
+			,success:function(a){
+				/*jsonArray의경우
+				console.log(a);
+				console.log(a[0]);
+				console.log(a[1]);
+				*/
+				
+				/*jsonObject의경우
+				console.log(a);
+				console.log(a.name);
+				console.log(a.age);
+				*/
+				
+				const value = "<li>" + a.name + "</li>"
+							+"<li>" + a.age + "</li>";
+			
+			$("#output2").html(value);
+			
+			
+			}
+			
+			,error:function(){
+				console.log("ajax통신실패")
+			}
+		})
+	}
+	
+	
+	</script>	
+	
+	<br>
+	
+	<h3>3.서버에 데이터 전송후, 조회된 vo 객체를 응답데이터로</h3>
+	
+	검색하고자 하는 회원번호 : <input type="number" id="input3">
+	<button onclick="test3();">조회</button>
+	
+	<div id="output3"></div>
+	
+	<script>
+	function test3(){
+		$.ajax({
+			 url:"jqAjax3.do"
+			,data:{
+				no:$("#input3").val()
+			}
+			,success:function(result){
+				console.log(result)
+				
+				const value = "이름 : " + result.userName + "<br>"
+							+ ",나이 : " + result.age + "<br>"
+							+ ",성별 :" +result.gender;
+							
+				$("#output3").html(value);
+				
+			}
+			,error:function(){
+				console.log("ajax통신실패")
+			}
+		
+			
+		})
+	}
+	</script>
+	<br>
+	
+	<h3>4.응답데이터로 조회된 여러 vo 객체들이 담겨있는 ArrayList 받기 </h3>
+	
+	<button onclick = "test4();">회원 전체조회</button>
+	<br><br>
+	
+	<table id="output4" border="1">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>이름</th>
+				<th>나이</th>
+				<th>성별</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+		</tbody>
+	</table>
+	
+	<script>
+		function test4(){
+			$.ajax({
+				 url:"jqAjax4.do"
+				,success:function(result){ //[{key:value,key:value},{}]
+					console.log(result);
+				
+					let value = "";
+					
+					for(let i =0; i <result.length; i++){
+						value +="<tr>"
+							  +"<td>" + result[i].userNo    + "</td>"
+							  +"<td>" + result[i].userName  + "</td>"
+							  +"<td>" + result[i].age       + "</td>"
+							  +"<td>" + result[i].gender    + "</td>"
+							  +"</tr>";
+					}
+					 $("#output4 tbody").html(value);
+				}
+				 
+				,error:function(){
+					console.log("ajax통신실패")
+				}
+				
+			})
+			
+		}
+	</script>
+	
+	
 	
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
