@@ -76,7 +76,8 @@ public class BoardDao {
 		/*
 		 * currentPage : 1 => 시작값 : 1 |끝값 : 10
 		 * currentPage : 2 => 시작값 : 11|끝값 : 20
-		 * currentPage : 3 => 시작값 : 21|끝값 : 30
+		 * currentPage : 3 => 시
+		 * 작값 : 21|끝값 : 30
 		 * 
 		 * 시작값 : (currentPage -1 ) * boardLimit + 1
 		 * 끝값 : 시작값 + boardLimit - 1
