@@ -42,6 +42,7 @@ public class BoardUpdateFormController extends HttpServlet {
 		
 		Attachment at = bService.selectAttachment(boardNo);
 		
+		System.out.println(list);
 		request.setAttribute("list", list);
 		request.setAttribute("b", b);
 		request.setAttribute("at", at);

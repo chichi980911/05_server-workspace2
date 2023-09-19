@@ -2,9 +2,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,32 +40,33 @@
 </style>
 </head>
 <body>
-	<%@ include file = "../common/menubar.jsp" %>
+	
+	<jsp:include page="../common/menubar.jsp">
 
     <div class="outer">
         <br>
         <h2 align="center">사진게시판</h2>
         <br>
         
-        <% if(loginMember != null){ %>
-        <!-- 로그인한 회원만 보여짐 -->
-        <div style="width: 850px;" align="right">
-            <a href="<%=contextPath%>/enrollform.th" class="btn btn-sm btn-secondary">글작성</a>
-        </div>
-		<% } %>
+         
+        <c:if test="${loginMember != null}">
+	        <div style="width: 850px;" align="right">
+	            <a href="enrollform.th" class="btn btn-sm btn-secondary">글작성</a>
+	        </div>
+		</c:if>
         <div class="list-area">
-        	<%for(Board b : list) {%>
-            <!-- 썸네일 한 개 -->
+        	<c:forEach var="b" items="${list}">
             <div class="thumbnail" align="center">
-            <input type = "hidden" value="<%= b.getBoardNo() %>">
-                <img src=" <%=contextPath %>/<%=b.getTitleImg() %>" width="200" height="150">
+            <input type = "hidden" value="${b.boardNo}">
+                <img src="${b.titleImg }" width="200" height="150">
                 
                 <p>
-                    No.<%=b.getBoardNo() %> <%=b.getBoardTitle() %> <br>
-                    조회수 : <%=b.getCount() %>
+                    No.${b.boardNo }${b.boardTitle } <br>
+                    조회수 : ${b.count }
                 </p>
             </div>
-		<%}%>
+		
+		</c:forEach>
         </div>
 
     </div>

@@ -41,7 +41,7 @@
         <br>
         <h2 align = "center"> 일반게시판</h2>
         <br>
-        <c:if test="${not empty loginMember }">
+        <c:if test="${loginMember !=null }">
             <div align = "right">
             <a href="enrollform.bo" class = "btn btn-sm btn-secondary" style="width: 80px;">글작성</a>
             </div>
@@ -67,7 +67,8 @@
 	                    <td colspan="6">조회된 게시글이 없습니다.</td>
 	                </tr>
                 </c:when>
-               <c:forEach var="b" items="${list }">
+                <c:otherwise>
+               <c:forEach var="b" items="${list}">
                 <tr>
                     <td>${b.boardNo }</td>
                     <td>${b.category }</td>
@@ -77,6 +78,7 @@
                     <td>${b.createDate }</td>
                 </tr>
                 </c:forEach>
+                </c:otherwise>
 			</c:choose>
             </tbody>
         </table>
@@ -92,22 +94,26 @@
             <br><br>
 
             <div class="paging=area" align="center">
-            	<c:if test="${pi.currentPage eq 1 }">
+            
+            	<c:if test="${pi.currentPage ne 1 }">
                 <button onclick="location.href='list.bo?cpage=${pi.currentPage-1}'"> &lt; </button>
                 </c:if>
                 
-                <c:forEach var="p" begin="${statPage}" end="${endPage}">
-                	<c:when test="${p == currentPage }">
-                		<button disabled>${p}</button>
-                	</c:when>
-                	<c:otherwise>
-                		<button onclick="location.href='list.bo?cpage=${p}'">${p}</button>
-                	</c:otherwise>
+                <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+                	<c:choose>
+	                	<c:when test="${p == pi.currentPage }">
+	                		<button disabled>${p}</button>
+	                	</c:when>
+	                	<c:otherwise>
+	                		<button onclick="location.href='list.bo?cpage=${p}'">${p}</button>
+	                	</c:otherwise>
+                	</c:choose>
                 </c:forEach>
                 
                 <c:if test="${currentPage != maxPage }">
                 	 <button onclick="location.href='list.bo?cpage=${currentpage+1}'"> &gt; </button>
                 </c:if>
+                
                 
                 
                 

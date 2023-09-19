@@ -2,6 +2,7 @@
 <%@page import="com.kh.board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -32,34 +33,35 @@
         <table id="detail-area" border="1" align="center">
             <tr>
                 <th width="70">카테고리</th>
-                <td width="70">${b.category }</td>
+                <td width="70">${b.category}</td>
                 <th width="70">제목</th>
-                <td width="350">${b.boardTitle }</td>
+                <td width="350">${b.boardTitle}</td>
             </tr>
             <tr>
                 <th>작성자</th>
-                <td>${b.boardWriter }</td>
+                <td>${b.boardWriter}</td>
                 <th>작성일</th>
-                <td>${b.createDate }></td>
+                <td>${b.createDate}</td>
             </tr>
             <tr>
                 <th>내용</th>
                 <td colspan="3">
-                    <p style="height: 200px;">${b.boardContent }</p></td>
+                    <p style="height: 200px;">${b.boardContent}</p></td>
                 
             </tr>
             <tr>
                 <th>첨부파일</th>
                 <td colspan="3">
-               
-                <c:when test="${at == null  }">
-               
-                	첨부파일이 없다요
-                </c:when>
-                <c:otherwise>
-                <!-- 첨부파일이 있는경우 -->
-                	 <a download="${originName }" href="${filePath }/${changeName}">${originName }</a>
-                 </c:otherwise>
+               <c:choose>
+	                <c:when test="${at == null}">
+	               
+	                	첨부파일이 없다요
+	                </c:when>
+	                <c:otherwise>
+	                <!-- 첨부파일이 있는경우 -->
+	                	 <a download="${originName }" href="${filePath }/${changeName}">${originName }</a>
+	                 </c:otherwise>
+                 </c:choose>
                 </td>
                 <!-- case.1 첨부파일이 없을경우 -->
                 <!-- -->
@@ -89,21 +91,22 @@
                     <tr>
 						 
                         <th>댓글작성</th>
-                        <c:if test="${loginMember != null }">
-                       
-                        <td>
-                            <textarea name="" id="replyContent" cols="50" rows="3" style="resize: none;"></textarea>
-                        </td>
-                        <td><button onclick="insertReply();">댓글등록버튼</button></td>
-                        </c:if>
-                       	<c:otherwise>
-                           <td>
-                            <textarea placeholder="로그인 후 이용 가능한 서비스 입니다" id="" cols="50" rows="3" style="resize: none;" readonly ></textarea>
-                        </td>
-                        <td>
-                            <button disabled>댓글등록</button>
-                        </td>
-                       </c:otherwise>
+                        <c:choose>
+	                        <c:when test="${loginMember != null }">
+		                        <td>
+		                            <textarea name="" id="replyContent" cols="50" rows="3" style="resize: none;"></textarea>
+		                        </td>
+		                        <td><button onclick="insertReply();">댓글등록버튼</button></td>
+	                        </c:when>
+	                       	<c:otherwise>
+		                        <td>
+		                            <textarea placeholder="로그인 후 이용 가능한 서비스 입니다" id="" cols="50" rows="3" style="resize: none;" readonly ></textarea>
+		                        </td>
+		                        <td>
+		                            <button disabled>댓글등록</button>
+		                        </td>
+	                       </c:otherwise>
+                       </c:choose>
                     </tr>
                 </thead>
                 <tbody>

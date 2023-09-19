@@ -35,9 +35,9 @@
         <table id="detail-area" border="1" align="center">
             <tr>
                 <th width="70">카테고리</th>
-                <td width="70"><%=b.getCategory() %></td>
+                <td width="70"><%=b.getCategory()%></td>
                 <th width="70">제목</th>
-                <td width="350"><%=b.getBoardTitle() %></td>
+                <td width="350"><%=b.getBoardTitle()%></td>
             </tr>
             <tr>
                 <th>작성자</th>

@@ -109,7 +109,7 @@
 	</form>
 	</c:when>
 	<c:otherwise>
-    <!-- case2. 로그인 후  -->
+   
     <div>
         <b>${loginMember.userName}님</b>의 방문을 환영합니다. <br><br>
         <div align = "center">

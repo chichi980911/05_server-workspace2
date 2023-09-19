@@ -47,10 +47,10 @@
                     <th width="70">카테고리</th>
                     <td width="500">
                         <select name="category">
-                            <!-- category 테이블로부터 조회해오기 -->
+                          
                             <c:if test="${not empty list }">
-                            	<c:forEach var="c" items="${list }">
-                            		<option value="${c.categoryNo }">${c.categoryName }</option>
+                            	<c:forEach var="c" items="${list}">
+                            		<option value="${c.categoryNo }">${c.categoryName}</option>
                             	</c:forEach>
                             </c:if>
                             
@@ -59,7 +59,7 @@
                        <script>
                        	$(function(){
                        		$("#update-form option").each(function(){
-                       			if($(this).text() == "${b.categoryName}"){
+                       			if($(this).text() == "${b.category}"){
                        				$(this).attr("selectd",true);
                        				
                        			}
