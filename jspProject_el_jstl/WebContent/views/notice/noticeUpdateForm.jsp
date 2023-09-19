@@ -35,19 +35,20 @@
 </style>
 </head>
 <body>
-    <%@ include file="../common/menubar.jsp" %>
+   
+    <jsp:include page="../common/menubar.jsp"/>
 
     <div class="outer" align="center">
         <br>
         <h2>공지사항 수정하기</h2>
         <br>
 
-        <form action="<%= contextPath%>/update.no" id="update-form" method="post">
-        	<input type="hidden" name ="num" value="<%=n.getNoticeNo()%>">
+        <form action="update.no" id="update-form" method="post">
+        	<input type="hidden" name ="num" value="${n.noticeNo }">
             <table>
                 <tr>
                     <th width="50" >제목</th>
-                    <td width="450" > <input type="text" name="title" required value="<%=n.getNoticeTitle()%>"></td>
+                    <td width="450" > <input type="text" name="title" required value="${n.noticeTitle }>"></td>
                 </tr>
                 <tr>
                     <th>내용</th>
@@ -55,7 +56,7 @@
                 </tr>
                     <tr>
                         <td colspan="2">
-                            <textarea name="content"  rows="10" style="resize: none;" required ><%=n.getNoticeContent() %></textarea>
+                            <textarea name="content"  rows="10" style="resize: none;" required >${n.noticeContent }</textarea>
                         </td>
                     </tr>
             </table>

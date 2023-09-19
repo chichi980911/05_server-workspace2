@@ -33,6 +33,14 @@
 	<p>변수와 조건문, 반복문 등의 로직과 관련된 문법을 제공</p>
 	<a href="01_core.jsp">core library </a>
 	
+	<br>
+	<h4>2.JSTL Formattion Library</h4>
+	<p>숫자 날짜 데이터 출력형식 지정할때</p>
+	<a href="02_fmt.jsp">fmt liblary</a>
+	
+	<br>
+	<h4>3.JSTL</h4>
+	
 	
 	
 	

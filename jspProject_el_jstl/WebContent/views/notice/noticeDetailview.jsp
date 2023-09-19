@@ -3,7 +3,8 @@
     pageEncoding="UTF-8"%>
 <%
 Notice n = (Notice)request.getAttribute("n");
-%>    
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,8 @@ Notice n = (Notice)request.getAttribute("n");
 
 </head>
 <body>
-<%@ include file = "../common/menubar.jsp" %>
+
+<jsp:include page="../common/menubar.jsp"/>
 
     <div class="outer" align="center">
         <br>
@@ -35,19 +37,19 @@ Notice n = (Notice)request.getAttribute("n");
         <table id="detail-area" border="1">
             <tr>
                 <th width="70">제목</th>
-                <td colspan="3" width="430"><%=n.getNoticeTitle() %></td>
+                <td colspan="3" width="430">${n.noticeTitle }</td>
                 
             </tr>
             <tr>
                 <th>작성자</th>
-                <td><%=n.getNoticeWriter() %></td>
+                <td>${n.noticeWriter }</td>
                 <th>작성일</th>
-                <td><%=n.getCreateDate() %></td>
+                <td>${n.createDate }></td>
             </tr>
             <tr>
                 <th>내용</th>
                 <td colspan="3">
-                    <p style="height: 150px;"><%=n.getNoticeContent() %></p>
+                    <p style="height: 150px;">${n.noticeContent }</p>
 
 
                 </td>
@@ -57,34 +59,15 @@ Notice n = (Notice)request.getAttribute("n");
         <br><br>
         
         <div>
-            <a href="<%=contextPath%>/list.no" class="btn btn-sm btn-secondary">목록가기</a>
+            <a href="list.no" class="btn btn-sm btn-secondary">목록가기</a>
             
+         	<c:if test="${not empty loginMember and n.noticeWriter eq loginMember.userId}">
             
-            <!-- 로그인한 사용자가 해당 글을 쓴 본인일 경우 -->
-            <% if(loginMember != null && n.getNoticeWriter().equals(loginMember.getUserId())){%>
-            	
-            
-            <a href="<%= contextPath %>/updateForm.no?num=<%=n.getNoticeNo()%>" class="btn btn-sm btn-warning">수정하기</a>
-            
-            <!-- 해당 글을 쓴 본인일 경우 삭제-->
-            <a href="<%= contextPath %>/deleteForm.no?num=<%=n.getNoticeNo()%>" class="btn btn-sm btn-danger">삭제하기</a>
-            
-            
-            <!-- 삭제 구현 url매핑 아무거나
-            	요청 성공시 => 공지사항 목록페이지 alert(공지사항이 성공적으로 삭제 됐습니다)
-            	요청 실패시 => 에러문구 보여지는 에러페이지
+	            <a href="updateForm.no?num=${n.noticeNo }" class="btn btn-sm btn-warning">수정하기</a>
+	            
+	            <a href="deleteForm.no?num=${n.noticeNo }" class="btn btn-sm btn-danger">삭제하기</a>
              
-             
-             삭제하기를 누르면 삭제여부 alert창 노출
-             확인버튼 클릭시 DELETE 수행
-             취소시 목록화면 으로 돌아가기
-             
-             
-             
-             -->
-             
-             
-       		<% } %>
+       		</c:if>
         </div>
     </div>
 </body>

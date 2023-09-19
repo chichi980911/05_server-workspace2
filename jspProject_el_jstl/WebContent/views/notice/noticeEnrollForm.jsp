@@ -35,7 +35,7 @@
         <h2>공지사항 작성하기</h2>
         <br>
 
-        <form action="<%=contextPath %>/insert.no" id="enroll-form" method="post">
+        <form action="insert.no" id="enroll-form" method="post">
             <table>
                 <tr>
                     <th style="width: 50;">제목</th>
