@@ -65,7 +65,7 @@
 	 </p>
 	 
 	 <h3>3.단 , EL사용시 내장 객체들에 저장된 키값이 동일할 경우</h3>
-	 scope값 : ${scope}
+	 scope값 : ${scope} <br>
 	 <!-- 
 	 El은 공유범위가 가장 작은 scope에서부터 해당 키값을 검색함 
 	 page => request => session =>application

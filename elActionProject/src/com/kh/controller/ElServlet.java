@@ -62,8 +62,8 @@ public class ElServlet extends HttpServlet {
 		request.setAttribute("student",new Person("차은우",23 ,"남자"));
 		
 		HttpSession session =  request.getSession();
-		session.setAttribute("academy", "KH정보교육원");
-		session.setAttribute("teacher", new Person("김시연",20,"여자"));
+		session.setAttribute("academy", "KH학원");
+		session.setAttribute("teacher", new Person("김상호",20,"남자"));
 		
 		//request / session 들의 scope에 동일한 키값으로 데이터담기
 		request.setAttribute("scope", "request");
